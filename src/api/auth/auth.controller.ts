@@ -30,4 +30,11 @@ export class AuthController {
   github(@Body() body: { code: string }, @Req() request: Request) {
     return this.authService.loginByGithub(body, request.ip);
   }
+
+  @Public()
+  @Throttle({ default: { limit: AUTH_THROTTLE_LIMIT, ttl: THROTTLE_TTL } })
+  @Post('github/token')
+  githubToken(@Body() body: { accessToken: string }, @Req() request: Request) {
+    return this.authService.loginByGithubAccessToken(body, request.ip);
+  }
 }
