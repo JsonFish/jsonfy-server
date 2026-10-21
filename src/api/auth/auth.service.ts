@@ -75,6 +75,7 @@ export class AuthService {
   ) {
     const accessToken =
       typeof body?.accessToken === 'string' ? body.accessToken.trim() : '';
+
     if (!accessToken || accessToken.length > 4096) {
       throw new BadRequestException('GitHub access token 无效');
     }
@@ -165,7 +166,9 @@ export class AuthService {
     const githubUserInfo = {
       avatar: profile.avatar_url ?? '',
       username: (
-        profile.name?.trim() || profile.login?.trim() || String(profile.id)
+        profile.name?.trim() ||
+        profile.login?.trim() ||
+        String(profile.id)
       ).slice(0, 50),
       email: profile.email?.trim() || '-',
       ip: ipData.ip,

@@ -7,7 +7,7 @@
 module.exports = {
   apps: [
     {
-      name: 'json-server',
+      name: 'jsonfy-server',
       script: 'dist/main.js',
       cwd: __dirname,
 
